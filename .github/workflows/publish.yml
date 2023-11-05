@@ -14,20 +14,24 @@ jobs:
       contents: read
       deployments: write
     steps:
-      - name: Checkout
+      - name: Checkout project
         uses: actions/checkout@v3
-      - name: Use Node.js
+      - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - name: Install latest nightly
+      - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: 1.70.0
           override: true
           target: wasm32-unknown-unknown
-      - run: npm ci
-      - run: npm run prod:build
+      - name: Install wasm-bindgen-cli
+        run: cargo install wasm-bindgen-cli
+      - name: Npm clean install
+        run: npm ci
+      - name: Production build
+        run: npm run prod:build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
