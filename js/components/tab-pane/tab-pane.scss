@@ -1,0 +1,71 @@
+@import '../../styles/colors';
+@import '../../styles/dimensions';
+
+.tab-pane {
+  display: flex;
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
+  flex-direction: row;
+  grid-area: tab-pane;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  padding: 40px 15px;
+  background-color: lighten($center-panel-color, 10%);
+  color: white;
+
+  &:not(:first-child) {
+    padding-top: 60px;
+  }
+
+  &.active {
+    box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.6);
+    &:after {
+      box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  border: 1px solid black;
+  border-bottom: 0;
+  border-top: 0;
+
+  &:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: -1;
+    height: 21px;
+    z-index: 1;
+    content: '';
+    border-bottom-right-radius: 20px;
+    border: 1px solid black;
+    border-top: 0;
+    border-left: 0;
+    background-color: inherit;
+  }
+
+  &:hover {
+    background-color: lighten($center-panel-color, 5%);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  max-width: 75%;
+  justify-items: center;
+  align-items: center;
+  padding: 0 40px;
+  background-color: lighten($center-panel-color, 5%);
+}

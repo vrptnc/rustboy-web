@@ -1,0 +1,27 @@
+@import '../../styles/colors';
+@import '../../styles/dimensions';
+
+.object-atlas {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+#object-atlas-canvas {
+  background-color: #a3b0a3;
+  flex: 1;
+  border: 1px solid black;
+}
+
+.object-info-container {
+  display: grid;
+  &.hidden {
+    visibility: hidden;
+  }
+  font-family: 'Pixel';
+  color: white;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  grid-column-gap: 20px;
+}

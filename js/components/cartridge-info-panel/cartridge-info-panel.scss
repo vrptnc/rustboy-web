@@ -1,0 +1,9 @@
+.cartridge-info {
+  display: grid;
+  font-family: 'Pixel';
+  color: white;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-rows: 1fr;
+}
+

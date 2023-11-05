@@ -1,0 +1,68 @@
+{
+  "name": "rustboy-frontend",
+  "version": "0.0.1",
+  "description": "Basic React frontend for the Rustboy WASM emulator",
+  "main": "index.js",
+  "scripts": {
+    "clean": "npx rimraf dist pkg",
+    "clean-all": "npm run clean && npx rimraf target",
+    "prod:build": "npm run clean && npm run rust:build && npx webpack --mode production --config webpack.config.prod.js",
+    "dev:build": "npm run clean && npm run rust:build && npx cross-env NODE_ENV=development webpack --mode development",
+    "rust:build": "cargo build --release --target wasm32-unknown-unknown && wasm-bindgen target/wasm32-unknown-unknown/release/rustboy_web.wasm --target=web --out-dir=pkg --omit-default-module-path",
+    "dev:start": "npm run dev:build && npx webpack serve"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vrptnc/photo-album.git"
+  },
+  "author": "Christiaan Verpooten",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/file-saver": "^2.0.5",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@wasm-tool/wasm-pack-plugin": "^1.6.0",
+    "archiver": "^5.3.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "copy-webpack-plugin": "^8.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.6",
+    "node-sass": "^9.0.0",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.2.3",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.2.3",
+    "typescript-transform-paths": "^3.3.1",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.11.0"
+  }
+}
