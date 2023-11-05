@@ -2,9 +2,9 @@ name: Publish
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - '*'           # Push events to every tag not containing /
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -28,3 +28,11 @@ jobs:
           target: wasm32-unknown-unknown
       - run: npm ci
       - run: npm run prod:build
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: rustboy
+          directory: dist
+          branch: main
